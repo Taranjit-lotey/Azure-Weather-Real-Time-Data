@@ -4,8 +4,7 @@ A serverless, event-driven weather monitoring system built on Microsoft Azure th
 📋 Overview
 This project demonstrates end-to-end real-time data engineering using Azure's modern data stack. The pipeline ingests weather data from external APIs, streams it through Event Hub, processes it using Microsoft Fabric and Azure Databricks, stores it in Kusto DB for fast analytical queries, and visualizes it in Power BI with sub-minute refresh rates.
 
-Key Highlights:
-
+Key Highlights
 Real-time data ingestion with sub-minute latency
 Scalable serverless architecture
 Automated alerting for extreme weather conditions
