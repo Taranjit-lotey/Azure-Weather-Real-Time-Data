@@ -9,5 +9,3 @@ Real-time data ingestion with sub-minute latency
 Scalable serverless architecture
 Automated alerting for extreme weather conditions
 Interactive dashboards with live refresh
-
-<img width="330" height="153" alt="image" src="https://github.com/user-attachments/assets/f32f02fd-1083-40b8-b277-8adba5d6d6b9" />
