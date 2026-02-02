@@ -1,0 +1,82 @@
+{
+    "apiVersion": "2026-01-01",
+    "id": "/subscriptions/f19c50e6-341a-438f-a7ec-b343006e14b7/resourceGroups/weather-streaming/providers/Microsoft.Databricks/workspaces/DB-Weather-Streaming",
+    "name": "DB-Weather-Streaming",
+    "type": "microsoft.databricks/workspaces",
+    "sku": {
+        "name": "premium"
+    },
+    "location": "eastus",
+    "tags": {},
+    "properties": {
+        "computeMode": "Hybrid",
+        "defaultCatalog": {
+            "initialType": "UnityCatalog",
+            "initialName": ""
+        },
+        "isUcEnabled": true,
+        "privateLinkAssets": [],
+        "managedResourceGroupId": "/subscriptions/f19c50e6-341a-438f-a7ec-b343006e14b7/resourceGroups/databricks-rg-DB-Weather-Streaming-aqhuadhjauqca",
+        "parameters": {
+            "enableFedRampCertification": {
+                "type": "Bool",
+                "value": false
+            },
+            "enableNoPublicIp": {
+                "type": "Bool",
+                "value": false
+            },
+            "prepareEncryption": {
+                "type": "Bool",
+                "value": false
+            },
+            "requireInfrastructureEncryption": {
+                "type": "Bool",
+                "value": false
+            },
+            "resourceTags": {
+                "type": "Object",
+                "value": {
+                    "application": "databricks",
+                    "databricks-environment": "true"
+                }
+            },
+            "storageAccountName": {
+                "type": "String",
+                "value": "dbstoragevt3jfhzpuob2g"
+            },
+            "storageAccountSkuName": {
+                "type": "String",
+                "value": "Standard_GRS"
+            }
+        },
+        "provisioningState": "Succeeded",
+        "authorizations": [
+            {
+                "principalId": "9a74af6f-d153-4348-988a-e2672920bee9",
+                "roleDefinitionId": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+            }
+        ],
+        "createdBy": {
+            "oid": "6c4029d4-782c-40f7-93a9-9ff4a33d841b",
+            "puid": "00034001A18853D2",
+            "applicationId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c"
+        },
+        "updatedBy": {
+            "oid": "6c4029d4-782c-40f7-93a9-9ff4a33d841b",
+            "puid": "00034001A18853D2",
+            "applicationId": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c"
+        },
+        "workspaceId": "7405618705796825",
+        "workspaceUrl": "adb-7405618705796825.5.azuredatabricks.net",
+        "createdDateTime": "2026-02-02T02:11:36.387Z"
+    },
+    "systemData": {
+        "createdBy": "tj2000@live.ca",
+        "createdByType": "User",
+        "createdAt": "2026-02-02T02:11:36.337Z",
+        "lastModifiedBy": "tj2000@live.ca",
+        "lastModifiedByType": "User",
+        "lastModifiedAt": "2026-02-02T02:11:36.337Z"
+    }
+}
