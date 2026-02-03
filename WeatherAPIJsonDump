@@ -1,0 +1,28 @@
+import requests
+import json
+
+#Grab the api from key vault
+API_KEY = dbutils.secrets.get(scope="key-vault", key="OpenWeatherMapAPIKey")
+CITY = 'Toronto'  # Example city
+
+def fetch_weather_data():
+    url = "http://api.weatherapi.com/v1/current.json"
+    url += f"?key={API_KEY}&q={CITY}&aqi=no"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        return data
+    else:
+        print(f"Error fetching data: {response.status_code}")
+        return None
+
+def dump_to_json(data, filename='weather_dump.json'):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+    print(f"Data dumped to {filename}")
+
+if __name__ == "__main__":
+    weather_data = fetch_weather_data()
+    if weather_data:
+        dump_to_json(weather_data)
+        print(json.dumps(weather_data, indent=4))
