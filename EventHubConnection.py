@@ -16,10 +16,7 @@ def send_event(event_data):
     event_data_batch.add(EventData(json.dumps(event_data)))
     producer.send_batch(event_data_batch)
 
-#test event
-event_data = {"temperature": 25, "humidity": 80, "city": "San Francisco"}
-
 #Send and close the producer
-send_event(event_data)
-producer.close()
+#send_event(event_data)
+#producer.close()
 
