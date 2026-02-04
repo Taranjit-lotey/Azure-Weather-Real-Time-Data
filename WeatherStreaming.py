@@ -3,7 +3,6 @@ import json
 import EventHubConnection as ehc
 
 
-
 # Function to handle the API response
 def handle_response(response):
     if response.status_code == 200:
@@ -104,11 +103,10 @@ def flatten_data(current_weather, forecast_weather, alerts):
     }
     return flattened_data
 
-# Main program
 def fetch_weather_data():
 
-    api_key = dbutils.secrets.get(scope="key-vault", key="OpenWeatherMapAPIKey")
-    location = 'Toronto'
+    base_url = "http://api.weatherapi.com/v1/"
+    location = "Toronto"
     weatherapikey = dbutils.secrets.get(scope="key-vault-scope", key="weatherapikey")
 
     # Get data from API
@@ -118,13 +116,42 @@ def fetch_weather_data():
 
     # Flatten and merge data
     merged_data = flatten_data(current_weather, forecast_weather, alerts)
-    print("Weather Data:", json.dumps(merged_data, indent=3))
+    return merged_data
 
-# Calling the Main Program
-fetch_weather_data()
+# Function to process each batch of streaming data
+last_sent_time = datetime.now() - timedelta(seconds=30)  # Initialize last sent time
 
-# Send the merged data to Event Hub
-ehc.send_event(merged_data)     
 
-# Close the producer after sending the event
+# Main program
+def process_batch(batch_df, batch_id):
+    global last_sent_time
+    try:
+        # Get current time
+        current_time = datetime.now()
+        
+        # Check if 30 seconds have passed since last event was sent
+        if (current_time - last_sent_time).total_seconds() >= 30:
+            # Fetch weather data
+            weather_data = fetch_weather_data()
+            
+            # Send the weather data (current weather part)
+            send_event(weather_data)
+
+            # Update last sent time
+            last_sent_time = current_time
+            print(f'Event Sent at {last_sent_time}')
+
+    except Exception as e:
+        print(f"Error sending events in batch {batch_id}: {str(e)}")
+        raise e
+
+# Set up a streaming source
+streaming_df = spark.readStream.format("rate").option("rowsPerSecond", 1).load()
+
+# Write the streaming data using foreachBatch to send weather data to Event Hub
+query = streaming_df.writeStream.foreachBatch(process_batch).start()
+
+query.awaitTermination()
+
+# Close the producer after termination
 producer.close()
